@@ -1,13 +1,23 @@
 <h1>Sample Code Socket Client</h1>
 <p>Project ini berisi sampel code untuk mengakses server socket.io</p>
-
+<p>versi socket.io yang digunakan adalah socket.io v2,</p>
 
 <h3>Setting</h3>
-1. socketServerURL 
-    Ganti dengan URL Server Socket yang akan digunakan
-2. client_id = "123; 
-    Bagian ini sesuaikan dengan credential yang didapat dari admin
-3. client_secret = "123; 
-    Bagian ini sesuaikan dengan credential yang didapat dari admin
-4. account_number = "01000000190"
-    Ganti dengan nomor account yang dimiliki merchant.
+<ul>
+    <li>
+        <h5>socketServerURL</h5>
+        <p>Ganti dengan URL Server Socket yang akan digunakan</p>
+    </li>    
+    <li>
+        <h5>client_id</h5>
+        <p>Bagian ini sesuaikan dengan credential yang didapat dari admin</p>
+    </li>    
+    <li>
+        <h5>client_secret</h5>
+        <p>Bagian ini sesuaikan dengan credential yang didapat dari admin</p>
+    </li>    
+    <li>
+        <h5>account_number</h5>
+        <p>Ganti dengan nomor account yang dimiliki merchant.</p>
+    </li>    
+</ul>
