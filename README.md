@@ -21,3 +21,10 @@
         <p>Ganti dengan nomor account yang dimiliki merchant.</p>
     </li>    
 </ul>
+
+<h3>Cara Menjalankan Aplikasi</h3>
+PHP <br/>
+php -S localhost:3001 index.html
+
+NODE JS <br/>
+Buat Project dengan nodejs, lalu serve index.html sebagai root staticnya
