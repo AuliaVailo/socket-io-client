@@ -23,8 +23,13 @@
 </ul>
 
 <h3>Cara Menjalankan Aplikasi</h3>
-PHP <br/>
+<strong>PHP</strong> <br/>
 php -S localhost:3001 index.html
 
-NODE JS <br/>
+<br/>
+<br/>
+<strong>NODEJS</strong> <br/>
 Buat Project dengan nodejs, lalu serve index.html sebagai root staticnya
+
+<br/>
+untuk kebutuhan uji coba, pastikan menggunakan port 3001 untuk menjalankan project ini, atau host dan port sesuai dengan data whitelist atau credential yang telah dibuat oleh admin.
