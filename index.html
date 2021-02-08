@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket Tester</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="flex w-full justify-center">
+        <div class="bg-blue-500 p-5 m-5 rounded-lg">
+            <div class="py-1">
+                <span class="text-white block">Nomor Account Customer</span>
+                <input type="text" value="" id="account_customer" class="ml-2 p-2 rounded shadow shadow-lg" placeholder="0100000019">
+            </div>
+            <div class="py-1">
+                <span class="text-white block">Nominal</span>
+                <input type="text" value="" id="amount" class="ml-2 p-2 rounded shadow shadow-lg" placeholder="100000">
+            </div>
+            <div class="py-1">
+                <span class="text-white block">Deskripsi</span>
+                <textarea id="description" rows="3" class="ml-2 p-2 rounded shadow shadow-lg" placeholder="Description"></textarea>
+            </div>
+            <div class="py-1">
+                <button class="bg-indigo-500 p-2 rounded-lg text-white w-full" id="kirim" onclick="requestPayment()">Kirim Permintaan</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.4.0/socket.io.js" integrity="sha512-Y8KodDCDqst1e8z0EGKiqEQq3T8NszmgW2HvsC6+tlNw7kxYxHTLl5Iw/gqZj/6qhZdBt+jYyOsybgSAiB9OOA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script>
+    <script>
+        const socketServerURL = "http://localhost:3000/"; // change with real server url
+        const client_id = "123;
+        const client_secret = "123";
+        var token = '';
+        var socket = {};
+        var account_number = "01000000190"
+        const account_customer = document.getElementById('account_customer')
+        const amount = document.getElementById('amount')
+        const description = document.getElementById('description')
+
+        function initSocket() {
+            axios.post(socketServerURL + 'token', {
+                "client_id": client_id,
+                "client_secret": client_secret
+            })
+            .then((result) => {
+                token = result.data.token
+                socket = io(socketServerUrl, {
+                    query: {
+                        token: token
+                    }
+                });
+
+                let dataLogin = {
+                    'account_no': account_number
+                }
+
+                socket.on("connect", () => {
+                    console.log("connected to server");
+                    socket.emit("merchant", dataLogin);
+                });
+
+                socket.on("pay", data => {
+                    // do somethings to response payment from pgm
+                })
+
+            }).catch((err) => {
+                console.error(err)
+            });
+        }
+
+        function requestPayment() {
+            if (account_customer.value == null || account_customer.value == "") {
+                alert('Nomor rekening Customer harus diisi')
+            } else {
+                let data = {
+                    account_no: account_customer.value,
+                    data: {
+                        amount: amount.value,
+                        description: description.value
+                    }
+                };
+                socket.emit("request", data);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initSocket();
+        }, false);
+    </script>
+</body>
+</html>
